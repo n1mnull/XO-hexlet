@@ -1,5 +1,6 @@
 package io.hexlet.xo.model;
 
+import io.hexlet.xo.model.exception.AlreadyOccupaiedException;
 import io.hexlet.xo.model.exception.InvalidPointException;
 import org.junit.Test;
 
@@ -7,9 +8,6 @@ import java.awt.*;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by Alenka on 29.10.2015.
- */
 public class FieldTest {
 
     @Test
@@ -25,7 +23,7 @@ public class FieldTest {
 
         final Field field = new Field();
         final Point inputPoint = new Point(0,0);
-        final Figure inputFigure = Figure.O;
+        final Figure inputFigure = Figure.X;
 
         field.setFigure(inputPoint, inputFigure);
         final Figure actualFigure = field.getFigure(inputPoint);
@@ -51,12 +49,63 @@ public class FieldTest {
         final Point inputPoint = new Point(-1,0);
 
         try {
-
-            final Figure actualFigure = field.getFigure(inputPoint);
+            field.getFigure(inputPoint);
             fail();
-        }catch (final InvalidPointException e) {
+        }catch (final InvalidPointException e) {}
 
-        }
+    }
 
+    @Test
+    public void testGetFigureWhenYLessThenZero() throws Exception {
+
+        final Field field = new Field();
+        final Point inputPoint = new Point(0,-1);
+
+        try {
+            field.getFigure(inputPoint);
+            fail();
+        }catch (final InvalidPointException e) {}
+
+    }
+
+    @Test
+    public void testGetFigureWhenXIsMoreThenSize() throws Exception {
+
+        final Field field = new Field();
+        final Point inputPoint = new Point(field.getSize()+1,0);
+
+        try {
+            field.getFigure(inputPoint);
+            fail();
+        }catch (final InvalidPointException e) {}
+
+    }
+
+    @Test
+    public void testGetFigureWhenYIsMoreThenSize() throws Exception {
+
+        final Field field = new Field();
+        final Point inputPoint = new Point(0,field.getSize()+1);
+
+        try {
+            field.getFigure(inputPoint);
+            fail();
+        }catch (final InvalidPointException e) {}
+
+    }
+
+    @Test
+    public void testSetFigureWhenAlreadyOccupied() throws Exception {
+
+        final Field field = new Field();
+        final Point inputPoint = new Point(0,0);
+        final Figure inputFigure = Figure.X;
+
+        field.setFigure(inputPoint, inputFigure);
+
+        try{
+            field.setFigure(inputPoint,inputFigure);
+            fail();
+        }catch (final AlreadyOccupaiedException e) {}
     }
 }
