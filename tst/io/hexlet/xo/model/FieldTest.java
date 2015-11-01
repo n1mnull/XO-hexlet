@@ -1,6 +1,5 @@
 package io.hexlet.xo.model;
 
-import io.hexlet.xo.model.exception.AlreadyOccupaiedException;
 import io.hexlet.xo.model.exception.InvalidPointException;
 import org.junit.Test;
 
@@ -10,9 +9,11 @@ import static org.junit.Assert.*;
 
 public class FieldTest {
 
+    int fieldSize = 3;
+
     @Test
     public void testGetSize() throws Exception {
-        final Field field = new Field();
+        final Field field = new Field(fieldSize);
 
         assertEquals(3,field.getSize());
 
@@ -21,7 +22,7 @@ public class FieldTest {
     @Test
     public void testSetFigure() throws Exception {
 
-        final Field field = new Field();
+        final Field field = new Field(fieldSize);
         final Point inputPoint = new Point(0,0);
         final Figure inputFigure = Figure.X;
 
@@ -34,7 +35,7 @@ public class FieldTest {
     @Test
     public void testGetFigureWhenFigureNotSet() throws Exception {
 
-        final Field field = new Field();
+        final Field field = new Field(fieldSize);
         final Point inputPoint = new Point(0,0);
 
         final Figure actualFigure = field.getFigure(inputPoint);
@@ -45,7 +46,7 @@ public class FieldTest {
     @Test
     public void testGetFigureWhenXLessThenZero() throws Exception {
 
-        final Field field = new Field();
+        final Field field = new Field(fieldSize);
         final Point inputPoint = new Point(-1,0);
 
         try {
@@ -58,7 +59,7 @@ public class FieldTest {
     @Test
     public void testGetFigureWhenYLessThenZero() throws Exception {
 
-        final Field field = new Field();
+        final Field field = new Field(fieldSize);
         final Point inputPoint = new Point(0,-1);
 
         try {
@@ -71,7 +72,7 @@ public class FieldTest {
     @Test
     public void testGetFigureWhenXIsMoreThenSize() throws Exception {
 
-        final Field field = new Field();
+        final Field field = new Field(fieldSize);
         final Point inputPoint = new Point(field.getSize()+1,0);
 
         try {
@@ -84,7 +85,7 @@ public class FieldTest {
     @Test
     public void testGetFigureWhenYIsMoreThenSize() throws Exception {
 
-        final Field field = new Field();
+        final Field field = new Field(fieldSize);
         final Point inputPoint = new Point(0,field.getSize()+1);
 
         try {
