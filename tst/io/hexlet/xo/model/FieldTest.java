@@ -94,7 +94,7 @@ public class FieldTest {
 
     }
 
-    @Test
+    /*@Test
     public void testSetFigureWhenAlreadyOccupied() throws Exception {
 
         final Field field = new Field();
@@ -107,5 +107,5 @@ public class FieldTest {
             field.setFigure(inputPoint,inputFigure);
             fail();
         }catch (final AlreadyOccupaiedException e) {}
-    }
+    }*/
 }
